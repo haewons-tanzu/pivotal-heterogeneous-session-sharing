@@ -1,0 +1,11 @@
+  ---
+  applications:
+  - name: pivotal-session-jboss
+    path: target/java-sample-web.war
+    memory: 1G
+    instances: 1
+    buildpack: jboss-buildpack
+    services:
+    - pcc-session-cache
+    env:
+      JAVA_OPTS: '-Dgemfire.security-username=cluster_operator_euwvAXl79Q1rGPw591FCw -Dgemfire.security-password=3M3RDBur1x1EzQhCldlNA -Dgemfire.security-client-auth-init=io.pivotal.cloudcache.ClientAuthInitialize.create

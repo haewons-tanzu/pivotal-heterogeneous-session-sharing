@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+    <display-name>Java Sample Application</display-name>
+    <description>
+        This is a simple web application with a source code
+        organization based on the recommendations of the Application
+        Developer's Guide.
+    </description>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>ShutdownServlet</servlet-name>
+        <servlet-class>com.nhbank.bmt.samples.ShutdownServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShutdownServlet</servlet-name>
+        <url-pattern>/shutdown</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>gemfire-session-filter</filter-name>
+        <filter-class>
+            org.apache.geode.modules.session.filter.SessionCachingFilter
+        </filter-class>
+        <init-param>
+            <param-name>cache-type</param-name>
+            <param-value>client-server</param-value>
+        </init-param>
+        <init-param>
+            <param-name>gemfire.property.cache-xml-file</param-name>
+            <param-value>/home/vcap/app/cache-client.xml</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>gemfire-session-filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+</web-app>
